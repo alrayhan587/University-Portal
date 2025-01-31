@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Initialize Git (if not already initialized)
+git init
+
+# Add all files to staging
+git add .
+
+# Commit changes with a message
+git commit -m "Initial commit"
+
+# Set the remote repository (change the URL if needed)
+git remote add origin https://github.com/alrayhan587/University-Portal.git
+
+# Rename branch to 'main' (if not already 'main')
+git branch -M main
+
+# Push code to the remote repository
+git push -u origin main
