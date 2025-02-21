@@ -50,7 +50,9 @@ const Login = () => {
       // console.log(data);
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.accessToken) as Tuser;
-      console.log(res);
+      console.log("Checking Response",res);
+      console.log("Checking user",user);
+
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       
       toast.success('Logged in');
