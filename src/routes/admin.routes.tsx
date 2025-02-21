@@ -6,11 +6,13 @@ import CreateStudent from "../pages/Admin/CreateStudent";
 
 
 
-/* A single array we have. i want to use it make everything from it. 
+/* 
+A single array we have. i want to use it make everything from it. 
 1. We have an array name admin path.
 2. adminpath have everything but in adminRoute and AdminSideBarItem need some of the value from adminPath
 3. to create adminRoute we have used a code using reduce and forEach
-4. to create adminSideBarItem we have used reduce and map*/
+4. to create adminSideBarItem we have used reduce and map
+*/
 
 
 

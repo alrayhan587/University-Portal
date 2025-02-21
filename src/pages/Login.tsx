@@ -5,6 +5,8 @@ import { useLoginMutation } from '../redux/feature/auth/authApi';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/feature/auth/authSlice';
 import { verifyToken } from '../util/verifyToken';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 /*
 type TuserInfo = {
@@ -20,6 +22,7 @@ console.log("error=>", error);
 */
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -36,15 +39,26 @@ const Login = () => {
 
 
   const checkValue = async (data) => {
-    const userInfo = {
-      id: data.id,
-      password: data.password,
+    toast.loading('Logging in..');
+
+    try {
+
+      const userInfo = {
+        id: data.id,
+        password: data.password,
+      }
+      // console.log(data);
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.accessToken) as Tuser;
+      console.log(res);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      
+      toast.success('Logged in');
+      navigate(`/${user.role}/dashboard`);
     }
-    // console.log(data);
-    const res = await login(userInfo).unwrap();
-    const user = verifyToken(res.data.accessToken);
-    console.log(res);
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
+    catch(err){
+      toast.error('Something went wrong');
+    }
   }
 
 
