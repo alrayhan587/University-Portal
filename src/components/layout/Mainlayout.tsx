@@ -1,16 +1,28 @@
-import { Layout, Menu } from 'antd';
+import { Button, Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 import SliderBar from './SliderBar';
+import { useAppDispatch } from '../../redux/hooks';
+import { logout } from '../../redux/feature/auth/authSlice';
 
 const { Header, Content, Footer } = Layout;
 
 
 export const Mainlayout = () => {
+
+    // The dispatch function obtained from useAppDispatch() is used to send actions to the Redux store
+    const dispatch = useAppDispatch();
+
+    const handleLogOut = () => {
+        //calling the logout action for the redux.
+        dispatch(logout());
+    }
     return (
         <Layout style={{ height: '100vh' }}>
             <SliderBar />
             <Layout>
-                <Header style={{ padding: 0, }} />
+                <Header>
+                    <Button onClick={handleLogOut}>Log out</Button>{''}
+                </Header>
                 <Content style={{ margin: '24px 16px 0' }}>
                     <div
                         style={{
